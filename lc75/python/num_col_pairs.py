@@ -2,7 +2,7 @@ from typing import List
 
 
 def transpose(grid: List[List[int]]) -> List[List[int]]:
-    g: List[List[int]] = [[0]*len(grid) for _ in range(len(grid))]
+    g: List[List[int]] = [[0] * len(grid) for _ in range(len(grid))]
     g[0][0] = 4
     for i in range(len(grid)):
         for j in range(len(grid)):
@@ -27,7 +27,7 @@ def helper(l: List[str]):
             break
     if i == -1:
         return l
-    return helper(l[0:i-1] + l[i+1:])
+    return helper(l[0:i - 1] + l[i + 1:])
 
 
 class Solution:
@@ -51,12 +51,16 @@ class Solution:
                 continue
             count += d[s]
         return count
-
+    
     def removeStars(self, s: str) -> str:
-        return helper(list(s))
+        stack: List[str] = []
+        for c in s:
+            if c == "*":
+                stack.pop()
+            else:
+                stack.append(c)
+        return ''.join(stack)
 
 
 s: Solution = Solution()
-print(s.equalPairs([[3, 2, 1], [1, 7, 6], [2, 7, 7]]))
-
-
+print(s.removeStars("leet**cod*e"))
